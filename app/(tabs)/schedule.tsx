@@ -7,11 +7,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
+  <SafeAreaView>
+    <ThemedView style={styles.titleContainer}>
+      <ThemedText type="title">Schedule!</ThemedText>
+      <HelloWave />
+    </ThemedView>
     </SafeAreaView>
   );
 }

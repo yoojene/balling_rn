@@ -9,7 +9,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Favourites!</ThemedText>
         <HelloWave />
       </ThemedView>
     </SafeAreaView>
