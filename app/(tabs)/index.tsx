@@ -2,15 +2,28 @@ import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ScrollView, StyleSheet } from "react-native";
+import { SearchBar } from "@rneui/themed";
+import { useState } from "react";
 
 export default function HomeScreen() {
+  const [search, setSearch] = useState("");
+
+  const updateSearch = (search: string) => {
+    setSearch(search);
+  };
   return (
     <>
       <ThemedView>
         <ThemedText type="title" style={styles.title}>
           Home
         </ThemedText>
+        <SearchBar
+          placeholder="Search..."
+          onChangeText={updateSearch}
+          value={search}
+        />
       </ThemedView>
+
       <ScrollView style={styles.scrollView}>
         <HelloWave />
       </ScrollView>
@@ -25,8 +38,9 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   scrollView: {
+    marginTop: 5,
     backgroundColor: "pink",
-    marginHorizontal: 20,
+    marginHorizontal: 5,
   },
   stepContainer: {
     gap: 8,
