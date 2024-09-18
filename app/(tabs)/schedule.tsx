@@ -7,19 +7,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-  <SafeAreaView>
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText type="title">Schedule!</ThemedText>
-      <HelloWave />
+    <ThemedView>
+      <ThemedText type="title" style={styles.title}>
+        Schedule
+      </ThemedText>
     </ThemedView>
-    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
+  title: {
+    fontSize: 18,
+    textAlign: "center",
+    backgroundColor: "rgba(29, 66, 138, 0.5)",
+    padding: 8,
   },
   stepContainer: {
     gap: 8,
