@@ -2,7 +2,7 @@ import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ScrollView, StyleSheet } from "react-native";
-import { SearchBar } from "@rneui/themed";
+import { SearchBar, ButtonGroup, Button } from "@rneui/themed";
 import { useState } from "react";
 
 export default function HomeScreen() {
@@ -11,6 +11,8 @@ export default function HomeScreen() {
   const updateSearch = (search: string) => {
     setSearch(search);
   };
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <>
       <ThemedView>
@@ -22,10 +24,84 @@ export default function HomeScreen() {
           onChangeText={updateSearch}
           value={search}
         />
+        <ButtonGroup
+          buttons={[
+            <Button
+              title="Players"
+              loading={false}
+              loadingProps={{ size: "small", color: "white" }}
+              buttonStyle={{
+                backgroundColor: "rgba(29, 66, 138, 1",
+                shadowColor: "rgba(200, 16, 46, 0.3)",
+                borderRadius: 15,
+              }}
+              titleStyle={{
+                fontWeight: "normal",
+                fontSize: 23,
+                color: "black",
+              }}
+              containerStyle={{
+                marginHorizontal: 50,
+                height: 50,
+                width: 200,
+                marginVertical: 10,
+              }}
+              onPress={() => {
+                console.log("Players");
+                setSelectedIndex(0);
+              }}
+            />,
+            <Button
+              title="Teams"
+              loading={false}
+              loadingProps={{ size: "small", color: "white" }}
+              buttonStyle={{
+                backgroundColor: "rgba(29, 66, 138, 1",
+                shadowColor: "rgba(200, 16, 46, 0.3)",
+                borderBottomEndRadius: 15,
+              }}
+              titleStyle={{
+                fontWeight: "normal",
+                fontSize: 23,
+                color: "black",
+              }}
+              containerStyle={{
+                marginHorizontal: 50,
+                height: 50,
+                width: 200,
+                marginVertical: 10,
+              }}
+              onPress={() => {
+                console.log("Teams");
+                setSelectedIndex(1);
+              }}
+            />,
+          ]}
+          selectedIndex={selectedIndex}
+          onPress={(value) => {
+            setSelectedIndex(value);
+          }}
+          containerStyle={{
+            marginBottom: 20,
+            borderRadius: 15,
+            // backgroundColor: "red",
+          }}
+        />
       </ThemedView>
 
       <ScrollView style={styles.scrollView}>
-        <HelloWave />
+
+        {selectedIndex === 0 ? (
+          <>
+          <ThemedText>players</ThemedText>
+          <HelloWave />
+          </>
+        ) : (
+          <>
+          <ThemedText>teams</ThemedText>
+           <HelloWave />
+           </>
+        )}
       </ScrollView>
     </>
   );
