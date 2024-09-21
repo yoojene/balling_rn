@@ -1,15 +1,43 @@
-import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ScrollView, StyleSheet } from "react-native";
-import { SearchBar, ButtonGroup, Button } from "@rneui/themed";
+import { SearchBar, ButtonGroup, Button, Avatar } from "@rneui/themed";
 import { useState } from "react";
+import playersJson from "../../assets/json/players.json";
+import teamsJson from "../../assets/json/teams.json";
+import { ListItem } from "@rneui/themed";
 
 export default function HomeScreen() {
   const [search, setSearch] = useState("");
 
+  const [players, setPlayers] = useState(playersJson.players);
+  const [teams, setTeams] = useState(teamsJson.teams);
+
   const updateSearch = (search: string) => {
     setSearch(search);
+
+    selectedIndex === 0 ? searchPlayers(search) : searchTeams(search);
+  };
+
+  const searchPlayers = (search: string) => {
+    // Seed search from static data each time
+    const searchPlayers = playersJson.players;
+
+    setPlayers(
+      searchPlayers.filter((p: any) => {
+        return p.strPlayer.toLowerCase().includes(search.toLowerCase());
+      })
+    );
+  };
+  const searchTeams = (search: string) => {
+    // Seed search from static data each time
+    const searchTeams = teamsJson.teams;
+
+    setTeams(
+      searchTeams.filter((t: any) => {
+        return t.strTeam.toLowerCase().includes(search.toLowerCase());
+      })
+    );
   };
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,6 +76,8 @@ export default function HomeScreen() {
               }}
               onPress={() => {
                 console.log("Players");
+                setSearch("");
+                setPlayers(playersJson.players);
                 setSelectedIndex(0);
               }}
             />,
@@ -73,6 +103,8 @@ export default function HomeScreen() {
               }}
               onPress={() => {
                 console.log("Teams");
+                setSearch("");
+                setTeams(teamsJson.teams);
                 setSelectedIndex(1);
               }}
             />,
@@ -84,23 +116,49 @@ export default function HomeScreen() {
           containerStyle={{
             marginBottom: 20,
             borderRadius: 15,
-            // backgroundColor: "red",
           }}
         />
       </ThemedView>
 
       <ScrollView style={styles.scrollView}>
-
         {selectedIndex === 0 ? (
           <>
-          <ThemedText>players</ThemedText>
-          <HelloWave />
+            {players &&
+              players.map((p: any) => (
+                <ListItem key={p.idPlayer} bottomDivider>
+                  <Avatar
+                    rounded
+                    size="large"
+                    source={{
+                      uri: p.strCutout,
+                    }}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title>{p.strPlayer}</ListItem.Title>
+                    <ListItem.Subtitle>{p.strNumber}</ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              ))}
           </>
         ) : (
           <>
-          <ThemedText>teams</ThemedText>
-           <HelloWave />
-           </>
+            {teams &&
+              teams.map((t) => (
+                <ListItem key={t.idTeam} bottomDivider>
+                  <Avatar
+                    rounded
+                    size="large"
+                    source={{
+                      uri: t.strBadge,
+                    }}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title>{t.strTeam}</ListItem.Title>
+                    <ListItem.Subtitle>{t.strTeamShort}</ListItem.Subtitle>
+                  </ListItem.Content>
+                </ListItem>
+              ))}
+          </>
         )}
       </ScrollView>
     </>
