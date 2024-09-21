@@ -1,11 +1,13 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { ScrollView, StyleSheet } from "react-native";
+import { Pressable, ScrollView, StyleSheet } from "react-native";
 import { SearchBar, ButtonGroup, Button, Avatar } from "@rneui/themed";
 import { useState } from "react";
 import playersJson from "../../assets/json/players.json";
 import teamsJson from "../../assets/json/teams.json";
 import { ListItem } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
+import { router } from "expo-router";
 
 export default function HomeScreen() {
   const [search, setSearch] = useState("");
@@ -48,9 +50,14 @@ export default function HomeScreen() {
           Home
         </ThemedText>
         <SearchBar
+          platform="ios"
+          searchIcon={<Icon name="search" />}
+          clearIcon={<Icon name="close" />}
           placeholder="Search..."
           onChangeText={updateSearch}
           value={search}
+          autoCorrect={false}
+          showCancel={false}
         />
         <ButtonGroup
           buttons={[
@@ -125,38 +132,71 @@ export default function HomeScreen() {
           <>
             {players &&
               players.map((p: any) => (
-                <ListItem key={p.idPlayer} bottomDivider>
-                  <Avatar
-                    rounded
-                    size="large"
-                    source={{
-                      uri: p.strCutout,
-                    }}
-                  />
-                  <ListItem.Content>
-                    <ListItem.Title>{p.strPlayer}</ListItem.Title>
-                    <ListItem.Subtitle>{p.strNumber}</ListItem.Subtitle>
-                  </ListItem.Content>
-                </ListItem>
+                <Pressable
+                  onPress={() =>
+                    router.push({
+                      pathname: "/player/[id]",
+                      params: {
+                        id: p.idPlayer,
+                        name: p.strPlayer,
+                        number: p.strNumber,
+                        photo: p.strCutout,
+                        position: p.strPosition,
+                        team: p.strTeam,
+                        description: p.strDescriptionEN,
+                      },
+                    })
+                  }
+                >
+                  <ListItem key={p.idPlayer} bottomDivider>
+                    <Avatar
+                      rounded
+                      size="large"
+                      source={{
+                        uri: p.strCutout,
+                      }}
+                    />
+                    <ListItem.Content>
+                      <ListItem.Title>{p.strPlayer}</ListItem.Title>
+                      <ListItem.Subtitle>{p.strNumber}</ListItem.Subtitle>
+                    </ListItem.Content>
+                  </ListItem>
+                </Pressable>
               ))}
           </>
         ) : (
           <>
             {teams &&
               teams.map((t) => (
-                <ListItem key={t.idTeam} bottomDivider>
-                  <Avatar
-                    rounded
-                    size="large"
-                    source={{
-                      uri: t.strBadge,
-                    }}
-                  />
-                  <ListItem.Content>
-                    <ListItem.Title>{t.strTeam}</ListItem.Title>
-                    <ListItem.Subtitle>{t.strTeamShort}</ListItem.Subtitle>
-                  </ListItem.Content>
-                </ListItem>
+                <Pressable
+                  onPress={() =>
+                    router.push({
+                      pathname: "/team/[id]",
+                      params: {
+                        id: t.idTeam,
+                        name: t.strTeam,
+                        number: t.strTeamShort,
+                        photo: t.strBadge,
+                        stadium: t.strStadium,
+                        description: t.strDescriptionEN,
+                      },
+                    })
+                  }
+                >
+                  <ListItem key={t.idTeam} bottomDivider>
+                    <Avatar
+                      rounded
+                      size="large"
+                      source={{
+                        uri: t.strBadge,
+                      }}
+                    />
+                    <ListItem.Content>
+                      <ListItem.Title>{t.strTeam}</ListItem.Title>
+                      <ListItem.Subtitle>{t.strTeamShort}</ListItem.Subtitle>
+                    </ListItem.Content>
+                  </ListItem>
+                </Pressable>
               ))}
           </>
         )}
@@ -171,9 +211,12 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(29, 66, 138, 0.5)",
     padding: 8,
   },
+  searchBar: {
+    backgroundColor: "#FFFFFF",
+    padding: 8,
+  },
   scrollView: {
     marginTop: 5,
-    backgroundColor: "pink",
     marginHorizontal: 5,
   },
   stepContainer: {
