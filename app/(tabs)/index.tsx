@@ -46,9 +46,6 @@ export default function HomeScreen() {
   return (
     <>
       <ThemedView>
-        <ThemedText type="title" style={styles.title}>
-          Home
-        </ThemedText>
         <SearchBar
           platform="ios"
           searchIcon={<Icon name="search" />}
@@ -133,6 +130,7 @@ export default function HomeScreen() {
             {players &&
               players.map((p: any) => (
                 <Pressable
+                  key={p.idPlayer}
                   onPress={() =>
                     router.push({
                       pathname: "/player/[id]",
@@ -148,7 +146,7 @@ export default function HomeScreen() {
                     })
                   }
                 >
-                  <ListItem key={p.idPlayer} bottomDivider>
+                  <ListItem bottomDivider>
                     <Avatar
                       rounded
                       size="large"
@@ -169,6 +167,7 @@ export default function HomeScreen() {
             {teams &&
               teams.map((t) => (
                 <Pressable
+                  key={t.idTeam}
                   onPress={() =>
                     router.push({
                       pathname: "/team/[id]",
@@ -183,7 +182,7 @@ export default function HomeScreen() {
                     })
                   }
                 >
-                  <ListItem key={t.idTeam} bottomDivider>
+                  <ListItem bottomDivider>
                     <Avatar
                       rounded
                       size="large"
@@ -205,12 +204,6 @@ export default function HomeScreen() {
   );
 }
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 18,
-    textAlign: "center",
-    backgroundColor: "rgba(29, 66, 138, 0.5)",
-    padding: 8,
-  },
   searchBar: {
     backgroundColor: "#FFFFFF",
     padding: 8,

@@ -37,8 +37,20 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <SafeAreaProvider>
         <CustomStatusBar backgroundColor="rgba(29, 66, 138, 0.5)" />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "rgba(29, 66, 138, 0.5)",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="(tabs)"
+            options={({ route }) => ({
+              headerTitle: "Home",
+              headerShown: true,
+            })}
+          />
           <Stack.Screen
             name="player/[id]"
             options={({ route }) => ({
