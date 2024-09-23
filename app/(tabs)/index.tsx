@@ -65,22 +65,9 @@ export default function HomeScreen() {
               title="Players"
               loading={false}
               loadingProps={{ size: "small", color: "white" }}
-              buttonStyle={{
-                backgroundColor: "rgba(29, 66, 138, 1",
-                shadowColor: "rgba(200, 16, 46, 0.3)",
-                borderRadius: 15,
-              }}
-              titleStyle={{
-                fontWeight: "normal",
-                fontSize: 23,
-                color: "black",
-              }}
-              containerStyle={{
-                marginHorizontal: 50,
-                height: 50,
-                width: 200,
-                marginVertical: 10,
-              }}
+              buttonStyle={styles.segmentButton}
+              titleStyle={styles.segmentTitle}
+              containerStyle={styles.segmentContainer}
               onPress={() => {
                 console.log("Players");
                 setSearch("");
@@ -92,22 +79,9 @@ export default function HomeScreen() {
               title="Teams"
               loading={false}
               loadingProps={{ size: "small", color: "white" }}
-              buttonStyle={{
-                backgroundColor: "rgba(29, 66, 138, 1",
-                shadowColor: "rgba(200, 16, 46, 0.3)",
-                borderBottomEndRadius: 15,
-              }}
-              titleStyle={{
-                fontWeight: "normal",
-                fontSize: 23,
-                color: "black",
-              }}
-              containerStyle={{
-                marginHorizontal: 50,
-                height: 50,
-                width: 200,
-                marginVertical: 10,
-              }}
+              buttonStyle={styles.segmentButton}
+              titleStyle={styles.segmentTitle}
+              containerStyle={styles.segmentContainer}
               onPress={() => {
                 console.log("Teams");
                 setSearch("");
@@ -219,6 +193,22 @@ const styles = StyleSheet.create({
   stepContainer: {
     gap: 8,
     marginBottom: 8,
+  },
+  segmentContainer: {
+    marginHorizontal: 50,
+    height: 50,
+    width: 200,
+    marginVertical: 10,
+  },
+  segmentButton: {
+    backgroundColor: "rgba(29, 66, 138, 1",
+    shadowColor: "rgba(200, 16, 46, 0.3)",
+    borderRadius: 15,
+  },
+  segmentTitle: {
+    fontWeight: "normal",
+    fontSize: 23,
+    color: "black",
   },
   reactLogo: {
     height: 178,
