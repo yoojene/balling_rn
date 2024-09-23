@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Pressable, ScrollView, StyleSheet } from "react-native";
+import { Platform, Pressable, ScrollView, StyleSheet } from "react-native";
 import { SearchBar, ButtonGroup, Button, Avatar } from "@rneui/themed";
 import { useState } from "react";
 import playersJson from "../../assets/json/players.json";
@@ -43,11 +43,14 @@ export default function HomeScreen() {
   };
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  let platform: any = undefined;
+  Platform.OS === "ios" ? (platform = "ios") : (platform = "android");
   return (
     <>
       <ThemedView>
         <SearchBar
-          platform="ios"
+          platform={platform}
           searchIcon={<Icon name="search" />}
           clearIcon={<Icon name="close" />}
           placeholder="Search..."
@@ -156,6 +159,7 @@ export default function HomeScreen() {
                     />
                     <ListItem.Content>
                       <ListItem.Title>{p.strPlayer}</ListItem.Title>
+                      <ListItem.Subtitle>{p.strPosition}</ListItem.Subtitle>
                       <ListItem.Subtitle>{p.strNumber}</ListItem.Subtitle>
                     </ListItem.Content>
                   </ListItem>
