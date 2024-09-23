@@ -94,10 +94,7 @@ export default function HomeScreen() {
           onPress={(value) => {
             setSelectedIndex(value);
           }}
-          containerStyle={{
-            marginBottom: 20,
-            borderRadius: 15,
-          }}
+          containerStyle={styles.segmentGroupContainer}
         />
       </ThemedView>
 
@@ -193,6 +190,10 @@ const styles = StyleSheet.create({
   stepContainer: {
     gap: 8,
     marginBottom: 8,
+  },
+  segmentGroupContainer: {
+    marginBottom: 20,
+    borderRadius: 15,
   },
   segmentContainer: {
     marginHorizontal: 50,

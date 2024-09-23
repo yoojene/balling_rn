@@ -5,12 +5,13 @@ import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function HomeScreen() {
+export default function Schedule() {
   return (
     <ThemedView>
-      <ThemedText type="title" style={styles.title}>
+      {/* <ThemedText type="title" style={styles.title}>
         Schedule
-      </ThemedText>
+      </ThemedText> */}
+      <Text>Schedule placeholder</Text>
     </ThemedView>
   );
 }

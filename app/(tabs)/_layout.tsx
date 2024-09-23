@@ -10,13 +10,16 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
+        headerStyle: {
+          backgroundColor: "rgba(29, 66, 138, 0.5)",
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "search" : "search-outline"}
@@ -28,6 +31,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="favourites"
         options={{
+          tabBarLabel: "Favourites",
           title: "Favourites",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon

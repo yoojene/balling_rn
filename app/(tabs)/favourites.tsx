@@ -4,13 +4,14 @@ import { ThemedView } from "@/components/ThemedView";
 import { StyleSheet } from "react-native";
 import { useContext } from "react";
 import { FavouritesContext } from "@/context/favorites";
-export default function HomeScreen() {
+
+export default function Favourites() {
   const favourites = useContext(FavouritesContext);
   return (
     <ThemedView>
-      <ThemedText type="title" style={styles.title}>
+      {/* <ThemedText type="title" style={styles.title}>
         Favourites
-      </ThemedText>
+      </ThemedText> */}
       {favourites &&
         favourites.map((favourite, idx) => (
           <ThemedText key={idx}>{favourite}</ThemedText>

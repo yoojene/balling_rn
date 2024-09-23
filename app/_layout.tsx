@@ -36,7 +36,8 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <SafeAreaProvider>
         <FavouritesContext.Provider value={favourites}>
-          <CustomStatusBar backgroundColor="rgba(29, 66, 138, 0.5)" />
+          {/** Dont need this with expo **/}
+          {/* <CustomStatusBar backgroundColor="rgba(29, 66, 138, 0.5)" /> */}
           <Stack
             screenOptions={{
               headerStyle: {
@@ -47,8 +48,8 @@ export default function RootLayout() {
             <Stack.Screen
               name="(tabs)"
               options={({ route }) => ({
-                headerTitle: "Home",
-                headerShown: true,
+                // headerTitle: "Home",
+                headerShown: false,
               })}
             />
             <Stack.Screen
