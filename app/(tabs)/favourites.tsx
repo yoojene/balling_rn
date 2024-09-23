@@ -1,17 +1,20 @@
 import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useContext } from "react";
+import { FavouritesContext } from "@/context/favorites";
 export default function HomeScreen() {
+  const favourites = useContext(FavouritesContext);
   return (
     <ThemedView>
       <ThemedText type="title" style={styles.title}>
         Favourites
       </ThemedText>
-      <HelloWave />
+      {favourites &&
+        favourites.map((favourite, idx) => (
+          <ThemedText key={idx}>{favourite}</ThemedText>
+        ))}
     </ThemedView>
   );
 }
