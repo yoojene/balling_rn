@@ -12,7 +12,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import CustomStatusBar from "./components/custom-status-bar";
-import { favourites, FavouritesContext } from "@/context/favorites";
+import { FavouritesProvider } from "@/context/favorites";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -35,7 +35,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <SafeAreaProvider>
-        <FavouritesContext.Provider value={favourites}>
+        <FavouritesProvider>
           {/** Dont need this with expo **/}
           {/* <CustomStatusBar backgroundColor="rgba(29, 66, 138, 0.5)" /> */}
           <Stack
@@ -68,7 +68,7 @@ export default function RootLayout() {
             />
             <Stack.Screen name="+not-found" />
           </Stack>
-        </FavouritesContext.Provider>
+        </FavouritesProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   );

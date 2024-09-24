@@ -3,19 +3,22 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { StyleSheet } from "react-native";
 import { useContext } from "react";
-import { FavouritesContext } from "@/context/favorites";
+import { FavouritesContext, useFavourites } from "@/context/favorites";
 
-export default function Favourites() {
-  const favourites = useContext(FavouritesContext);
+export default function Favour() {
+  // const favourites = useContext(FavouritesContext);
+  const { favourites } = useFavourites();
+
+  console.log(favourites);
   return (
     <ThemedView>
-      {/* <ThemedText type="title" style={styles.title}>
-        Favourites
-      </ThemedText> */}
       {favourites &&
         favourites.map((favourite, idx) => (
           <ThemedText key={idx}>{favourite}</ThemedText>
         ))}
+      {!favourites.length && (
+        <ThemedText type="title">No favourites yet</ThemedText>
+      )}
     </ThemedView>
   );
 }
@@ -23,7 +26,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     textAlign: "center",
-    backgroundColor: "rgba(29, 66, 138, 0.5)",
     padding: 8,
   },
   stepContainer: {

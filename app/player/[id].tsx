@@ -3,13 +3,15 @@ import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { Avatar } from "@rneui/themed";
-import { useState } from "react";
+import { useFavourites, useFavouritesDispatch } from "@/context/favorites";
 
 export default function PlayerDetail() {
   const { id, name, number, photo, position, description } =
     useLocalSearchParams();
 
-  const [favourite, setFavourite] = useState(false);
+  const { favourites } = useFavourites();
+  const dispatch = useFavouritesDispatch();
+  const hasFavourite = favourites.filter((fav) => fav === name).length === 1;
 
   return (
     <ScrollView style={styles.container}>
@@ -17,13 +19,25 @@ export default function PlayerDetail() {
         size={48}
         rounded
         icon={{
-          name: favourite ? "heart" : "heart-outline",
+          name: hasFavourite ? "heart" : "heart-outline",
           type: "ionicon",
           size: 30,
           color: "black",
         }}
         containerStyle={{ backgroundColor: "rgba(29, 66, 138, 0.5)" }}
-        onPress={() => setFavourite(!favourite)}
+        onPress={() => {
+          if (!hasFavourite) {
+            dispatch({
+              type: "ADD_FAVOURITE",
+              payload: name,
+            });
+          } else {
+            dispatch({
+              type: "REMOVE_FAVOURITE",
+              payload: name,
+            });
+          }
+        }}
       />
       <Image style={{ height: 400 }} source={photo} contentFit="contain" />
 
