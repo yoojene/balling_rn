@@ -14,7 +14,10 @@ export default function Favour() {
     <ThemedView>
       {favourites &&
         favourites.map((favourite, idx) => (
-          <ThemedText key={idx}>{favourite}</ThemedText>
+          <>
+            <ThemedText>{favourite.name}</ThemedText>
+            <ThemedText>{favourite.number}</ThemedText>
+          </>
         ))}
       {!favourites.length && (
         <ThemedText type="title">No favourites yet</ThemedText>

@@ -11,7 +11,8 @@ export default function PlayerDetail() {
 
   const { favourites } = useFavourites();
   const dispatch = useFavouritesDispatch();
-  const hasFavourite = favourites.filter((fav) => fav === name).length === 1;
+  const hasFavourite =
+    favourites.filter((fav) => fav.name === name).length === 1;
 
   return (
     <ScrollView style={styles.container}>
@@ -29,12 +30,12 @@ export default function PlayerDetail() {
           if (!hasFavourite) {
             dispatch({
               type: "ADD_FAVOURITE",
-              payload: name,
+              payload: { name, number, photo, position, description },
             });
           } else {
             dispatch({
               type: "REMOVE_FAVOURITE",
-              payload: name,
+              payload: { name, number, photo, position, description },
             });
           }
         }}
