@@ -3,7 +3,7 @@ import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { Avatar } from "@rneui/themed";
-import { useFavourites, useFavouritesDispatch } from "@/context/favorites";
+import { useFavourites, useFavouritesDispatch } from "@/context/favourites";
 
 export default function TeamDetail() {
   const { id, name, number, photo, stadium, description } =

@@ -12,7 +12,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import CustomStatusBar from "./components/custom-status-bar";
-import { FavouritesProvider } from "@/context/favorites";
+import { FavouritesProvider } from "@/context/favourites";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 

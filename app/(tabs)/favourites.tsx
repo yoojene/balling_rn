@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { useFavourites } from "@/context/favorites";
+import { useFavourites } from "@/context/favourites";
 import { Avatar } from "@rneui/base";
 import { HeartBroken } from "@/components/HeartBroken";
 
