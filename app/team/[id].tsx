@@ -11,7 +11,8 @@ export default function TeamDetail() {
 
   const { favourites } = useFavourites();
   const dispatch = useFavouritesDispatch();
-  const hasFavourite = favourites.filter((fav) => fav === name).length === 1;
+  const hasFavourite =
+    favourites.filter((fav) => fav.name === name).length === 1;
 
   return (
     <ScrollView style={styles.container}>
@@ -28,13 +29,27 @@ export default function TeamDetail() {
         onPress={() => {
           if (!hasFavourite) {
             dispatch({
-              type: "ADD_FAVOURITE",
-              payload: name,
+              type: "ADD_FAVOURITE_TEAM",
+              payload: {
+                name,
+                number,
+                photo,
+                stadium,
+                description,
+                isPlayer: false,
+              },
             });
           } else {
             dispatch({
               type: "REMOVE_FAVOURITE",
-              payload: name,
+              payload: {
+                name,
+                number,
+                photo,
+                stadium,
+                description,
+                isPlayer: false,
+              },
             });
           }
         }}

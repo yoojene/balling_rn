@@ -29,13 +29,27 @@ export default function PlayerDetail() {
         onPress={() => {
           if (!hasFavourite) {
             dispatch({
-              type: "ADD_FAVOURITE",
-              payload: { name, number, photo, position, description },
+              type: "ADD_FAVOURITE_PLAYER",
+              payload: {
+                name,
+                number,
+                photo,
+                position,
+                description,
+                isPlayer: true,
+              },
             });
           } else {
             dispatch({
               type: "REMOVE_FAVOURITE",
-              payload: { name, number, photo, position, description },
+              payload: {
+                name,
+                number,
+                photo,
+                position,
+                description,
+                isPlayer: true,
+              },
             });
           }
         }}
