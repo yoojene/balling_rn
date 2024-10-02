@@ -1,18 +1,86 @@
-import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { Text, View } from "react-native";
+import { Avatar, Card } from "@rneui/themed";
+import { ScrollView, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useState } from "react";
+import scheduleJson from "../../assets/json/events.json";
 
 export default function Schedule() {
+  const [events, setEvents] = useState(scheduleJson.events);
+
   return (
-    <ThemedView>
-      {/* <ThemedText type="title" style={styles.title}>
-        Schedule
-      </ThemedText> */}
-      <Text>Schedule placeholder</Text>
-    </ThemedView>
+    <ScrollView>
+      <>
+        {events &&
+          events.map((event, idx) => (
+            <Card key={idx}>
+              <View style={styles.stepContainer}>
+                <ThemedText type="default">{event.strEvent}</ThemedText>
+                <ThemedText type="default">{event.dateEvent}</ThemedText>
+                <View style={styles.avatarContainer}>
+                  <View style={styles.avatar}>
+                    <Avatar
+                      rounded
+                      size="medium"
+                      source={{
+                        uri: event.strHomeTeamBadge,
+                      }}
+                    />
+                    {event.intHomeScore !== null ? (
+                      <Text
+                        style={[
+                          styles.scoreText,
+                          {
+                            color:
+                              parseInt(event?.intHomeScore) >
+                              parseInt(event?.intAwayScore)
+                                ? "green"
+                                : "red",
+                          },
+                        ]}
+                      >
+                        {event.intHomeScore}
+                      </Text>
+                    ) : (
+                      <Text>Not Played</Text>
+                    )}
+                  </View>
+                  <View style={styles.avatar}>
+                    <Avatar
+                      rounded
+                      size="medium"
+                      source={{
+                        uri: event.strAwayTeamBadge,
+                      }}
+                    />
+                    {event.intAwayScore !== null ? (
+                      <Text
+                        style={[
+                          styles.scoreText,
+                          {
+                            color:
+                              parseInt(event?.intHomeScore) <
+                              parseInt(event?.intAwayScore)
+                                ? "green"
+                                : "red",
+                          },
+                        ]}
+                      >
+                        {event.intAwayScore}
+                      </Text>
+                    ) : (
+                      <Text>Not Played</Text>
+                    )}
+                  </View>
+                </View>
+              </View>
+              <Text style={{ alignItems: "flex-start" }}>
+                {event.strResult.replaceAll(`<br>`, `\n`)}
+              </Text>
+            </Card>
+          ))}
+      </>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -32,5 +100,17 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute",
+  },
+  avatarContainer: {
+    flexDirection: "row",
+  },
+  avatar: {
+    padding: 8,
+    alignItems: "flex-start",
+  },
+  scoreText: {
+    padding: 8,
+    width: 50,
+    textAlign: "center",
   },
 });

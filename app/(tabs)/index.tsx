@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Platform, Pressable, ScrollView, StyleSheet } from "react-native";
 import { SearchBar, ButtonGroup, Button, Avatar } from "@rneui/themed";
