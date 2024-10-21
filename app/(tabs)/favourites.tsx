@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { useFavourites } from "@/context/favourites";
 import { Avatar } from "@rneui/base";
 import { HeartBroken } from "@/components/HeartBroken";
+import { router } from "expo-router";
 
 export default function Favourites() {
   const { favourites } = useFavourites();
@@ -29,6 +30,20 @@ export default function Favourites() {
                     size="large"
                     source={{
                       uri: favourite.photo,
+                    }}
+                    onPress={() => {
+                      router.push({
+                        pathname: "/player/[id]",
+                        params: {
+                          id: favourite.id,
+                          name: favourite.name,
+                          number: favourite.number,
+                          photo: favourite.photo,
+                          position: favourite.position,
+                          team: favourite.name,
+                          description: favourite.description,
+                        },
+                      });
                     }}
                   />
                   <ThemedText type="defaultSemiBold">
@@ -58,6 +73,20 @@ export default function Favourites() {
                     size="large"
                     source={{
                       uri: favourite.photo,
+                    }}
+                    onPress={() => {
+                      router.push({
+                        pathname: "/team/[id]",
+                        params: {
+                          id: favourite.id,
+                          name: favourite.name,
+                          number: favourite.number,
+                          photo: favourite.photo,
+                          position: favourite.position,
+                          team: favourite.name,
+                          description: favourite.description,
+                        },
+                      });
                     }}
                   />
                   <ThemedText type="defaultSemiBold">

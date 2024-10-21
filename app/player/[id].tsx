@@ -31,6 +31,7 @@ export default function PlayerDetail() {
             dispatch({
               type: "ADD_FAVOURITE_PLAYER",
               payload: {
+                id,
                 name,
                 number,
                 photo,
@@ -43,6 +44,7 @@ export default function PlayerDetail() {
             dispatch({
               type: "REMOVE_FAVOURITE",
               payload: {
+                id,
                 name,
                 number,
                 photo,
