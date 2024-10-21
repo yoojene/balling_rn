@@ -24,6 +24,7 @@ export const favouritesReducer = (
       return [
         ...favourites,
         {
+          id: action.payload.id,
           name: action.payload.name,
           number: action.payload.number,
           photo: action.payload.photo,
@@ -40,6 +41,7 @@ export const favouritesReducer = (
       return [
         ...favourites,
         {
+          id: action.payload.id,
           name: action.payload.name,
           number: action.payload.number,
           photo: action.payload.photo,
